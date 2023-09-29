@@ -1,5 +1,6 @@
 package com.laqf.Dao;
 
+import java.net.SocketTimeoutException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -81,7 +82,7 @@ public class StudentDAO {
         return students;
     }
 
-    Boolean addStudent(Student student) {
+    public Boolean addStudent(Student student) {
         PreparedStatement ps; // Encapsula la conexion
         Connection con = ConnectionDB.getConnectionBD(); // Nos guarda la conexion
         String sql = "INSERT INTO student (first_name, last_name, phone, email) values (?, ?, ?, ?)";
@@ -110,7 +111,7 @@ public class StudentDAO {
     }
 
 
-     Boolean updateStudent(Student student) {
+     public Boolean updateStudent(Student student) {
          PreparedStatement ps; // Encapsula la conexion
          Connection con = ConnectionDB.getConnectionBD(); // Nos guarda la conexion
          String sql = "UPDATE student set first_name = ?, last_name = ?, phone = ?, email = ? WHERE id_student = ?";
@@ -140,7 +141,7 @@ public class StudentDAO {
          return false;
     }
 
-    Boolean deleteStudent(Student student) {
+    public Boolean deleteStudent(Student student) {
         PreparedStatement ps; // Encapsula la conexion
         ResultSet rs; // Guarda la conexion
         Connection con = ConnectionDB.getConnectionBD(); // Nos guarda la conexion
@@ -167,51 +168,30 @@ public class StudentDAO {
     }
 
     public static void main(String[] args) {
+
+
         StudentDAO studentdao = new StudentDAO();
-//
-//        List<Student> students = studentdao.listStudent();
-//
-//        students.forEach(System.out::println);
 
 
-//        Student student1 = new Student(1);
-//        System.out.println("Estudiante antes de la busqueda" + student1);
-//
-//        boolean encontrado = studentdao.findStudentById(student1);
-//        if (encontrado) {
-//            System.out.println("Estudiante encontrado " + student1);
-//        } else {
-//            System.out.println("No se encontro el estudiante " + student1);
-//        }
 
 
-//        Student student = new Student("Luis", "Como", "23132", "luiiss@gmail.com");
-//
-//        boolean creado = studentdao.addStudent(student);
-//        if (creado) {
-//            System.out.println("Estudiante creado " + student);
-//        } else {
-//            System.out.println("No se creo el estudiante " + student);
-//        }
-
-//        Student student1 = new Student(1);
-//
-//        boolean encontrado = studentdao.deleteStudent(student1);
-//        if (encontrado) {
-//            System.out.println("Estudiante eliminado " + student1);
-//        } else {
-//            System.out.println("No se pudo eliminar el estudiante " + student1);
-//        }
 
 
-        Student student = new Student(3, "Luis", "Florez", "22222", "luis12@gmail.com");
 
-        boolean encontrado = studentdao.updateStudent(student);
+
+
+        Student student1 = new Student(2);
+
+        boolean encontrado = studentdao.deleteStudent(student1);
         if (encontrado) {
-            System.out.println("Estudiante actualizado " + student);
+            System.out.println("Estudiante eliminado " + student1);
         } else {
-            System.out.println("No se pudo actualizar el estudiante " + student);
+            System.out.println("No se pudo eliminar el estudiante " + student1);
         }
+
+
+
+
 
 
     }

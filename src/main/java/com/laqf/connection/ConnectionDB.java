@@ -15,9 +15,9 @@ public class ConnectionDB {
         //Variables de conexion
 
         String db = "sena_db";
-        String url = "jdbc:mysql://localhost:3306/" + db;
+        String url = "jdbc:mysql://localhost:3307/" + db;
         String name= "root";
-        String pass = "";
+        String pass = "root";
 
         try {
             //Sirve para comprobar el driver
