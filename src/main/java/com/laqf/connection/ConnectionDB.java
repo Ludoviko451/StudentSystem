@@ -5,49 +5,59 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class ConnectionDB {
+    private String db = "sena_db";
+    private String url = "jdbc:mysql://localhost:3306/" + db;
+    private String name = "root";
+    private String pass = "";
 
-    public static Connection getConnectionBD(){
+    public ConnectionDB() {
+        // Constructor vacío
+    }
 
-        //Objeto para guardar la conexion
+    public Connection getConnection() {
         Connection connection = null;
 
-        //Variables de conexion
-
-        String db = "sena_db";
-        String url = "jdbc:mysql://localhost:3307/" + db;
-        String name= "root";
-        String pass = "root";
-
         try {
-            //Sirve para comprobar el driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-            // Intento conectarme ala base de datos
             connection = DriverManager.getConnection(url, name, pass);
-        }
-        catch (ClassNotFoundException | SQLException ex){
-
-            JOptionPane.showMessageDialog(null, ex, "Error en la conexión a la base de datos: " + ex.getMessage(), JOptionPane.ERROR_MESSAGE);
-            connection = null;
-        }
-        finally {
-            JOptionPane.showMessageDialog(null, "Conexión Exitosa");
-            return connection;
+        } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
         }
 
+        return connection;
     }
+
+
 
     public static void main(String[] args) {
-        Connection c = getConnectionBD();
+        ConnectionDB connectionDB = new ConnectionDB();
+        Connection c = connectionDB.getConnection();
 
-        if(c != null){
-            System.out.println("Conexion exitosa" + c);
-        }
-        else{
-            System.out.println("Error en la conexion" + c);
-        }
+        if (c != null) {
+            System.out.println("Successful connection");
+        } else {
+            System.out.println("Connection error");}
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

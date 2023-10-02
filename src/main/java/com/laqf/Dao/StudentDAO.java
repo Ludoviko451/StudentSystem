@@ -18,7 +18,8 @@ public class StudentDAO {
 
         PreparedStatement ps; // Encapsula la conexion
         ResultSet rs; // Guarda la conexion
-        Connection con = ConnectionDB.getConnectionBD(); // Nos guarda la conexion
+        ConnectionDB connectionDB = new ConnectionDB();
+        Connection con = connectionDB.getConnection(); // Nos guarda la conexion
         String sql = "SELECT * FROM student WHERE id_student = ?";
         try {
             ps = con.prepareStatement(sql);
@@ -34,12 +35,12 @@ public class StudentDAO {
                 return true;
             }
         } catch (SQLException e) {
-            System.out.println("Ocurrio un error en la consulta " + e.getMessage());
+            System.out.println("An error occurred in the query" + e.getMessage());
         } finally {
             try {
                 con.close();
             } catch (SQLException e) {
-                System.out.println("Ocurrio un error al cerrar la conexion " + e.getMessage());
+                System.out.println("An error occurred while closing the connection " + e.getMessage());
             }
         }
         return false;
@@ -51,7 +52,8 @@ public class StudentDAO {
 
         PreparedStatement ps; // Encapsula la conexion
         ResultSet rs; // Guarda la conexion
-        Connection con = ConnectionDB.getConnectionBD(); // Nos guarda la conexion
+        ConnectionDB connectionDB = new ConnectionDB();
+        Connection con = connectionDB.getConnection();  // Nos guarda la conexion
 
         String sql = "SELECT * FROM student ORDER BY id_student";
 
@@ -70,12 +72,12 @@ public class StudentDAO {
                 students.add(student);
             }
         } catch (SQLException e) {
-            System.out.println("Ocurrio un error en la consulta " + e.getMessage());
+            System.out.println("An error occurred in the query " + e.getMessage());
         } finally {
             try {
                 con.close();
             } catch (SQLException e) {
-                System.out.println("Ocurrio un error al cerrar la conexion " + e.getMessage());
+                System.out.println("An error occurred while closing the connection " + e.getMessage());
             }
         }
 
@@ -84,7 +86,8 @@ public class StudentDAO {
 
     public Boolean addStudent(Student student) {
         PreparedStatement ps; // Encapsula la conexion
-        Connection con = ConnectionDB.getConnectionBD(); // Nos guarda la conexion
+        ConnectionDB connectionDB = new ConnectionDB();
+        Connection con = connectionDB.getConnection();  // Nos guarda la conexion
         String sql = "INSERT INTO student (first_name, last_name, phone, email) values (?, ?, ?, ?)";
         try {
             ps = con.prepareStatement(sql);
@@ -99,12 +102,12 @@ public class StudentDAO {
                 return true;
             }
         } catch (SQLException e) {
-            System.out.println("Ocurrió un error en la consulta " + e.getMessage());
+            System.out.println("An error occurred in the query " + e.getMessage());
         } finally {
             try {
                 con.close();
             } catch (SQLException e) {
-                System.out.println("Ocurrió un error al cerrar la conexión " + e.getMessage());
+                System.out.println("An error occurred while closing the connection " + e.getMessage());
             }
         }
         return false;
@@ -113,7 +116,8 @@ public class StudentDAO {
 
      public Boolean updateStudent(Student student) {
          PreparedStatement ps; // Encapsula la conexion
-         Connection con = ConnectionDB.getConnectionBD(); // Nos guarda la conexion
+         ConnectionDB connectionDB = new ConnectionDB();
+         Connection con = connectionDB.getConnection();  // Nos guarda la conexion
          String sql = "UPDATE student set first_name = ?, last_name = ?, phone = ?, email = ? WHERE id_student = ?";
          try {
              ps = con.prepareStatement(sql);
@@ -130,12 +134,12 @@ public class StudentDAO {
                  return true;
              }
          } catch (SQLException e) {
-             System.out.println("Ocurrió un error en la consulta " + e.getMessage());
+             System.out.println("An error occurred in the query" + e.getMessage());
          } finally {
              try {
                  con.close();
              } catch (SQLException e) {
-                 System.out.println("Ocurrió un error al cerrar la conexión " + e.getMessage());
+                 System.out.println("An error occurred while closing the connection" + e.getMessage());
              }
          }
          return false;
@@ -144,7 +148,8 @@ public class StudentDAO {
     public Boolean deleteStudent(Student student) {
         PreparedStatement ps; // Encapsula la conexion
         ResultSet rs; // Guarda la conexion
-        Connection con = ConnectionDB.getConnectionBD(); // Nos guarda la conexion
+        ConnectionDB connectionDB = new ConnectionDB();
+        Connection con = connectionDB.getConnection();  // Nos guarda la conexion
         String sql = "DELETE FROM student WHERE id_student = ?";
         try {
             ps = con.prepareStatement(sql);
@@ -156,43 +161,14 @@ public class StudentDAO {
                 return true;
             }
         } catch (SQLException e) {
-            System.out.println("Ocurrio un error en la consulta " + e.getMessage());
+            System.out.println("An error occurred in the query" + e.getMessage());
         } finally {
             try {
                 con.close();
             } catch (SQLException e) {
-                System.out.println("Ocurrio un error al cerrar la conexion " + e.getMessage());
+                System.out.println("An error occurred while closing the connection " + e.getMessage());
             }
         }
         return false;
-    }
-
-    public static void main(String[] args) {
-
-
-        StudentDAO studentdao = new StudentDAO();
-
-
-
-
-
-
-
-
-
-        Student student1 = new Student(2);
-
-        boolean encontrado = studentdao.deleteStudent(student1);
-        if (encontrado) {
-            System.out.println("Estudiante eliminado " + student1);
-        } else {
-            System.out.println("No se pudo eliminar el estudiante " + student1);
-        }
-
-
-
-
-
-
     }
 }

@@ -1,6 +1,7 @@
 package com.laqf.presentation;
 
 import com.laqf.Dao.StudentDAO;
+import com.laqf.connection.ConnectionDB;
 import com.laqf.domain.Student;
 import java.util.List;
 import java.util.Scanner;
@@ -47,7 +48,7 @@ public class SystemStudentApp {
             }
 
             case 2 -> {
-                System.out.println("Ingrese la id del estudiante que desea buscar");
+                System.out.println("Enter the ID of the student you want to find");
 
                 int id = Integer.parseInt(scanner.nextLine());
                 Student student1 = new Student(id);
@@ -88,7 +89,7 @@ public class SystemStudentApp {
 
             }
         }
-        return false;
+        return exit;
     }
 
     private static void addStudent(Scanner scanner, StudentDAO studentdao)
@@ -108,9 +109,9 @@ public class SystemStudentApp {
 
         boolean creado = studentdao.addStudent(student);
         if (creado) {
-            System.out.println("Estudiante creado " + student);
+            System.out.println("Student creaed " + student);
         } else {
-            System.out.println("No se creo el estudiante " + student);
+            System.out.println("Student could not be created " + student);
         }
     }
 
